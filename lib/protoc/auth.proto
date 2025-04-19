@@ -1,0 +1,185 @@
+syntax = "proto3";
+service AuthService {
+  rpc Login (AuthRequest) returns (AuthResponse);  // Endpoint de autenticación
+  rpc crearReconocimiento (CrearRecoRequest) returns (CrearRecoResponse);  // Endpoint crear crearReconocimiento
+  rpc editarReconocimiento (EditarRecoRequest) returns (EditarRecoResponse); // Endpoint editar Reconocimiento
+  rpc eliminarReconocimiento (EliminarRecoRequest) returns (EliminarRecoResponse); // Endpoint eliminar Reconocimiento
+  rpc obtenerReconocimiento (ObtenerRecoRequest) returns (ReconocimientoDetalle); // Endpoint consultar un Reconocimiento
+  rpc crearproducto(CrearProductoRequest) returns (CrearProductoResponse); 
+  rpc editarproducto(editarProductoRequest) returns (CrearProductoResponse);  
+  rpc eliminarproducto(EliminarProductoRequest) returns (EliminarProductoResponse);  
+  rpc guardarImagen (GuardarImagenRequest) returns (GuardarImagenResponse);  
+  rpc eliminadaImagen (eliminarImagenRequest) returns (eliminarImagenResponse);  
+
+}
+
+// Login----------------------------------------------------------
+
+message AuthRequest {
+  int32 Id_usuario = 1;
+  string Clave = 2;
+}
+
+message AuthResponse {
+  string Mensaje = 1;
+  string Token = 2;
+  string Usuario = 3;
+  bool Autenticado = 4;
+}
+
+// crearReconocimiento ----------------------------------------------------------
+message CrearRecoRequest {
+  string Do = 1;
+  string DocumentoTranspote = 2;
+}
+
+message CrearRecoResponse {
+  int32 IdReco = 1;
+  string Do = 2;
+  string DocumentoTranspote = 3;
+  string Mensaje = 4;
+}
+
+message EditarRecoRequest {
+  string Do = 1;
+  int32 IdReco = 2;
+  string DocumentoTranspote = 3;
+}
+message EditarRecoResponse {
+  int32 IdReco = 1;
+  string Do = 2;
+  string DocumentoTranspote = 3;
+  string Mensaje = 4;
+}
+
+message EliminarRecoRequest {
+  int32 IdReco =1;
+  string autorizacion =2;
+}
+message EliminarRecoResponse {
+  int32 IdReco = 1;
+  string Mensaje = 2;
+}
+
+message ObtenerRecoRequest {
+  string Do = 1; // NUEVO
+  string DocumentoTranspote = 2; // NUEVO
+}
+
+message ReconocimientoDetalle {
+  int32 IdReco = 1;
+  string Do = 2;
+  string DocumentoTranspote = 3;
+  repeated Producto Productos = 4;
+}
+
+//crear editar producto ----------------------------------------------------------------------------
+
+message CrearProductoRequest {
+  int32 ItemFactura = 1;
+  int32 IdReco= 2;
+  string Nombre = 3;
+  string Marca= 4;
+  string Modelo= 5;
+  string Referencia = 6;
+  string Tipo = 7;
+  string Voltaje = 8;
+  string Componentes = 9;
+  string serial = 10;
+  string OtrasCaracteristicas = 11;
+}
+
+message editarProductoRequest {
+  int32 ItemFactura = 1;
+  int32 IdReco= 2;
+  string Nombre = 3;
+  string Marca= 4;
+  string Modelo= 5;
+  string Referencia = 6;
+  string Tipo = 7;
+  string Voltaje = 8;
+  string Componentes = 9;
+  string OtrasCaracteristicas = 10;
+  string serial = 11;
+  int32 IdProducto = 12;
+
+}
+
+message CrearProductoResponse {
+  int32 ItemFactura = 1;
+  string Nombre = 3;
+  string Marca= 4;
+  string Modelo= 5;
+  string Referencia = 6;
+  string Tipo = 7;
+  string Voltaje = 8;
+  string Componentes = 9;
+  string OtrasCaracteristicas = 10;
+  int32 IdProducto = 11;
+  string Mensaje = 12;
+  string serial = 13;
+}
+
+message EliminarProductoRequest {
+  int32 IdReco= 1;
+  int32 IdProducto = 2;
+}
+
+message EliminarProductoResponse {
+  int32 IdReco= 1;
+  int32 IdProducto = 2;
+  string Mensaje = 3;
+}
+
+message Producto {
+  int32 IdProducto = 1;
+  int32 ItemFactura = 2;
+  string Nombre = 3;
+  string Marca = 4;
+  string Modelo = 5;
+  string Referencia = 6;
+  string Tipo = 7;
+  string Voltaje = 8;
+  string Componentes = 9;
+  string OtrasCaracteristicas = 10;
+  string serial = 11;
+  repeated Imagen Imagenes = 12;
+}
+
+
+// guardarImagen ---------------------------------------------------------------------
+message GuardarImagenRequest {
+  int32 IdProducto = 1;
+  bytes Imagen = 2;
+  string Formato = 3;
+}
+
+message GuardarImagenResponse {
+  int32 IdProducto = 1;
+  int32 idImagen = 2;
+  string UrlImagen = 3;
+  string Mensaje = 4;
+}
+
+
+// eliminar imagen ----------------------------------------------------------------------------------
+message eliminarImagenRequest {
+  int32 IdProducto = 1;
+  int32 IdReco = 2;
+  int32 idImagen = 3;
+}
+
+message eliminarImagenResponse {
+  bool eliminada = 1;
+  int32 idImagen = 2;
+  string Mensaje = 3;
+}
+
+// ------------------- Imagen (uso interno) -------------------
+message Imagen {
+  int32 IdImagen = 1;
+  string Url = 2;
+  string Formato = 3;
+}
+
+//python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. auth.proto regenerar auth proto
