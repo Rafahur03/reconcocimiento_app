@@ -16,7 +16,7 @@ service AuthService {
 // Login----------------------------------------------------------
 
 message AuthRequest {
-  int32 Id_usuario = 1;
+  int32 Idusuario = 1;
   string Clave = 2;
 }
 

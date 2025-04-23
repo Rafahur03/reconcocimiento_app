@@ -21,10 +21,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       _cargando = true;
       _mensajeError = null;
     });
-    final respuesta = await loginUsuario(
-      ref,
-      idUsuario: int.tryParse(_usuarioControler.text.trim()) ?? 0,
-      clave: _claveControler.text.trim(),
+
+    final respuesta = await ref.read(
+      loginUsuarioProvider(
+        LoginCredentials(
+          idUsuario: int.tryParse(_usuarioControler.text.trim()) ?? 0,
+          clave: _claveControler.text.trim(),
+        ),
+      ).future,
     );
 
     setState(() => _cargando = false);
@@ -42,9 +46,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            Image.asset('asset/image/logo_geocarga.png', height: 40),
+            Image.asset('assets/image/logo_geocarga.png', height: 40),
             const SizedBox(width: 10),
-            const Text('Agencia De Aduanas GEOCARGA LTDA Nivel II'),
+            const Flexible(
+              child: Text(
+                'Agencia De Aduanas GEOCARGA LTDA Nivel II',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                softWrap: true,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+              ),
+            ),
           ],
         ),
         centerTitle: true,

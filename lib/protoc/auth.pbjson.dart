@@ -17,15 +17,15 @@ import 'dart:typed_data' as $typed_data;
 const AuthRequest$json = {
   '1': 'AuthRequest',
   '2': [
-    {'1': 'Id_usuario', '3': 1, '4': 1, '5': 5, '10': 'IdUsuario'},
+    {'1': 'Idusuario', '3': 1, '4': 1, '5': 5, '10': 'Idusuario'},
     {'1': 'Clave', '3': 2, '4': 1, '5': 9, '10': 'Clave'},
   ],
 };
 
 /// Descriptor for `AuthRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authRequestDescriptor = $convert.base64Decode(
-    'CgtBdXRoUmVxdWVzdBIdCgpJZF91c3VhcmlvGAEgASgFUglJZFVzdWFyaW8SFAoFQ2xhdmUYAi'
-    'ABKAlSBUNsYXZl');
+    'CgtBdXRoUmVxdWVzdBIcCglJZHVzdWFyaW8YASABKAVSCUlkdXN1YXJpbxIUCgVDbGF2ZRgCIA'
+    'EoCVIFQ2xhdmU=');
 
 @$core.Deprecated('Use authResponseDescriptor instead')
 const AuthResponse$json = {

@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:reconocimiento_app/models/usuario_autenticado.dart';
 
 class UsuarioAutenticadoNotifier extends StateNotifier<UsuarioAutenticado?> {
@@ -8,11 +8,9 @@ class UsuarioAutenticadoNotifier extends StateNotifier<UsuarioAutenticado?> {
     state = usuario;
   }
 
-  void limpiarUsuario() {
+  void clearUsuario() {
     state = null;
   }
-
-  bool get isautenticado => state?.autenticado == true;
 }
 
 final usuarioAutenticadoProvider =

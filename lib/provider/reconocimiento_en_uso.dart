@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reconocimiento_app/models/reconocimiento.dart';
-import 'package:reconocimiento_app/provider/providers.dart';
+import 'package:reconocimiento_app/provider/provider_grpc_services.dart';
 import 'package:reconocimiento_app/services/grpc_service_reconocimiento.dart';
 
 class ReconocimientoState {
@@ -110,6 +110,10 @@ final reconocimientoProvider =
     });
 
 final reconocimientoServicesProvider = Provider<ReconocimientoServices>((ref) {
-  final grpc = ref.watch(grpcProvider);
-  return ReconocimientoServices(grpc);
+  final grpcAsyncValue = ref.watch(grpcProvider);
+  return grpcAsyncValue.when(
+    data: (grpc) => ReconocimientoServices(grpc),
+    loading: () => throw UnimplementedError('Aún cargando GrpcServices'),
+    error: (error, stackTrace) => throw error,
+  );
 });

@@ -15,12 +15,12 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class AuthRequest extends $pb.GeneratedMessage {
   factory AuthRequest({
-    $core.int? idUsuario,
+    $core.int? idusuario,
     $core.String? clave,
   }) {
     final $result = create();
-    if (idUsuario != null) {
-      $result.idUsuario = idUsuario;
+    if (idusuario != null) {
+      $result.idusuario = idusuario;
     }
     if (clave != null) {
       $result.clave = clave;
@@ -32,7 +32,7 @@ class AuthRequest extends $pb.GeneratedMessage {
   factory AuthRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthRequest', createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'IdUsuario', $pb.PbFieldType.O3, protoName: 'Id_usuario')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'Idusuario', $pb.PbFieldType.O3, protoName: 'Idusuario')
     ..aOS(2, _omitFieldNames ? '' : 'Clave', protoName: 'Clave')
     ..hasRequiredFields = false
   ;
@@ -59,13 +59,13 @@ class AuthRequest extends $pb.GeneratedMessage {
   static AuthRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get idUsuario => $_getIZ(0);
+  $core.int get idusuario => $_getIZ(0);
   @$pb.TagNumber(1)
-  set idUsuario($core.int v) { $_setSignedInt32(0, v); }
+  set idusuario($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasIdUsuario() => $_has(0);
+  $core.bool hasIdusuario() => $_has(0);
   @$pb.TagNumber(1)
-  void clearIdUsuario() => clearField(1);
+  void clearIdusuario() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get clave => $_getSZ(1);

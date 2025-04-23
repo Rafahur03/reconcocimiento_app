@@ -9,7 +9,7 @@ final productosProvider =
 
 // Notifier que maneja la lógica de los productos
 class ProductosNotifier extends StateNotifier<List<Product>> {
-  ProductosNotifier(List<Product> state) : super(state);
+  ProductosNotifier(super.state);
 
   // Agregar un nuevo producto
   void agregarProducto(Product producto) {

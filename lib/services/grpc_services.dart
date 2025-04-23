@@ -4,19 +4,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:reconocimiento_app/utils/respuesta.dart';
 
 class GrpcServices {
-  late ClientChannel channel;
+  late ClientChannel channel; // Hacer _channel privado
 
+  // Método estático asíncrono para inicializar la instancia de GrpcServices
   GrpcServices() {
-    _initializeClient();
+    initializeClient();
   }
+
+  // Constructor privado para evitar la instanciación directa
 
   //inicializamos la conexion al servidor
 
-  Future<void> _initializeClient() async {
+  Future<void> initializeClient() async {
     await dotenv.load();
     final String serevrAddress = dotenv.env['GRPC_SERVER'] ?? '10.0.2.2';
     final int serverPort =
         int.tryParse(dotenv.env['GRPC_PORT'] ?? '50051') ?? 50051;
+
     channel = ClientChannel(
       serevrAddress,
       port: serverPort,

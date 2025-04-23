@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reconocimiento_app/models/reconocimiento.dart';
-import 'package:reconocimiento_app/provider/usuario_autenticado_state.dart';
+import 'package:reconocimiento_app/provider/provider_usuario_auth.dart';
 import 'package:reconocimiento_app/provider/reconocimiento_en_uso.dart';
 
 class CrearReconocimientoScreen extends ConsumerStatefulWidget {
