@@ -9,9 +9,18 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Image.asset('asset/image/logo_geocarga.png', height: 40),
+            Image.asset('assets/image/logo_geocarga.png', height: 40),
             const SizedBox(width: 10),
-            const Text('Agencia De Aduanas GEOCARGA LTDA Nivel II'),
+            const Flexible(
+              child: Text(
+                'Agencia De Aduanas GEOCARGA LTDA Nivel II',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                softWrap: true,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+              ),
+            ),
           ],
         ),
         centerTitle: true,

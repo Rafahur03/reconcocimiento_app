@@ -16,16 +16,8 @@ Future<Respuesta<UsuarioAutenticado>> loginUsuario(
     data: (grpc) async {
       final stub = AuthServiceClient(grpc.channel);
       final request = AuthRequest(idusuario: idUsuario, clave: clave);
-      print('Request: $request');
       final login = await grpc.sendRequest(() => stub.login(request));
-
-      if (!login.exito || login.data == null) {
-        print('Error: ${login.mensaje}');
-        return Respuesta(exito: false, mensaje: login.mensaje);
-      }
-
       final authResponse = login.data!;
-      print('Response: $authResponse');
 
       if (authResponse.autenticado) {
         final usuarioAutenticado = UsuarioAutenticado.fromGrpc(authResponse);
@@ -37,7 +29,10 @@ Future<Respuesta<UsuarioAutenticado>> loginUsuario(
           data: usuarioAutenticado,
         );
       } else {
-        return Respuesta(exito: false, mensaje: login.mensaje);
+        return Respuesta(
+          exito: authResponse.autenticado,
+          mensaje: authResponse.mensaje,
+        );
       }
     },
     loading: () async => Respuesta(exito: false, mensaje: 'Cargando...'),
